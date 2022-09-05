@@ -8,6 +8,6 @@ import { Message } from '@pablodev2/api-interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
+  hello$ = this.http.get<Message>('/api');
   constructor(private http: HttpClient) {}
 }
