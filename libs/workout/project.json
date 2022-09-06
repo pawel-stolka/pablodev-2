@@ -1,0 +1,22 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/workout/src",
+  "prefix": "pablodev2",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/workout"],
+      "options": {
+        "jestConfig": "libs/workout/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/workout/**/*.ts", "libs/workout/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

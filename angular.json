@@ -5,6 +5,9 @@
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
     "frontend": "apps/frontend",
-    "frontend-e2e": "apps/frontend-e2e"
+    "frontend-e2e": "apps/frontend-e2e",
+    "material": "libs/material",
+    "ui": "libs/ui",
+    "workout": "libs/workout"
   }
 }
