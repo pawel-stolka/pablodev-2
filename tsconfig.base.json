@@ -17,6 +17,7 @@
     "paths": {
       "@pablodev2/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@pablodev2/material": ["libs/material/src/index.ts"],
+      "@pablodev2/navigation": ["libs/navigation/src/index.ts"],
       "@pablodev2/ui": ["libs/ui/src/index.ts"],
       "@pablodev2/workout": ["libs/workout/src/index.ts"]
     }

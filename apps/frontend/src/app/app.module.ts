@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { UiModule, uiRoutes } from '@pablodev2/ui';
+import { UiModule } from '@pablodev2/ui';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { navigationRoutes } from '@pablodev2/navigation';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', children: uiRoutes },
+      {path: '', children: navigationRoutes}, 
+      // { initialNavigation: 'enabled' },
+      // { path: '', children: uiRoutes },
      
       {
         path: 'workout',
