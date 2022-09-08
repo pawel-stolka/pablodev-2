@@ -1,0 +1,33 @@
+// .top-nav {
+//   display: flex;
+//   align-items: center;
+//   height: 64px;
+//   margin: auto;
+//   width: 960px;
+// }
+
+// .top-nav-link {
+//   text-decoration: none;
+// //   color: black;
+
+// //   &.active {
+// //     text-decoration: underline;
+// //     color: wheat;
+// //   }
+// }
+
+mat-toolbar {
+  display: flex;
+  justify-content: left;
+//   justify-content: space-around;
+  align-items: center;
+  // background-color: rgb(181, 246, 255);
+//   background-color: var(--blue);
+  background-color: blue;
+
+  .active {
+    // border: 1px solid var(--white);
+    border: 1px solid white;
+    color: white;
+  }
+}

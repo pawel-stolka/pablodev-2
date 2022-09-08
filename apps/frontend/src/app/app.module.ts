@@ -8,6 +8,7 @@ import { UiModule } from '@pablodev2/ui';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { navigationRoutes } from '@pablodev2/navigation';
+import { LayoutModule } from '@pablodev2/layout';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,10 +17,16 @@ import { navigationRoutes } from '@pablodev2/navigation';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: '', children: navigationRoutes}, 
+      // {path: '', children: navigationRoutes}, 
       // { initialNavigation: 'enabled' },
       // { path: '', children: uiRoutes },
-     
+      {
+        path: '',
+        loadChildren: () =>
+          import('@pablodev2/home-page').then(
+            (mod) => mod.HomePageModule // added
+          ),
+      },
       {
         path: 'workout',
         loadChildren: () =>
@@ -29,6 +36,7 @@ import { navigationRoutes } from '@pablodev2/navigation';
       },
     ]),
     UiModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],

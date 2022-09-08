@@ -6,6 +6,8 @@
     "api-interfaces": "libs/api-interfaces",
     "frontend": "apps/frontend",
     "frontend-e2e": "apps/frontend-e2e",
+    "home-page": "libs/home-page",
+    "layout": "libs/layout",
     "material": "libs/material",
     "navigation": "libs/navigation",
     "ui": "libs/ui",
