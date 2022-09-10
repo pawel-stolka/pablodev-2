@@ -12,7 +12,7 @@ const TEMP_DELAY = 1000;
   providedIn: 'root',
 })
 export class WorkoutService {
-  private API_URL = '';
+  private API_URL = 'http://localhost:3003';
 
   // isPending$: Observable<boolean>;
   // contentList$: Observable<Workout[]>;
@@ -38,9 +38,9 @@ export class WorkoutService {
   }
 
   fetchAll() {
-    return this._http.get<Workout[]>(`${this.API_URL}/workout`).pipe(
+    return this._http.get<Workout[]>(`${this.API_URL}/workouts`).pipe(
       delay(TEMP_DELAY), // ----> bajer temp -----
-      // tap((workouts: Workout[]) => console.log('fetchAll', workouts)),
+      tap((workouts: Workout[]) => console.log('fetchAll', workouts)),
       map((workouts: Workout[]) =>
         workouts.sort(compareBy('date', DESCENDING))
       ),

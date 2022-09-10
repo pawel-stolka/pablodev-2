@@ -1,0 +1,10 @@
+{
+  "workouts": [
+    {
+      "id": 1,
+      "name": "string",
+      "date": "string",
+      "reps": [1, 2, "test"]
+    }
+  ]
+}
