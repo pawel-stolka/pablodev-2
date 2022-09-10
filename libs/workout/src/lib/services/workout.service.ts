@@ -66,8 +66,6 @@ export class WorkoutService {
   }
 }
 
-
-
 export function compareBy(prop: string, descending = true) {
   const order = descending ? -1 : 1;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -79,13 +77,16 @@ export function compareBy(prop: string, descending = true) {
 export function groupWorkouts(data: Workout[], by: string): DateNameReps[] {
   const period = getPeriod(by);
   const groups: any[] = groupBy(data, period);
-  // console.log('groups', groups)
   return groups.map(([period, list]) => {
     const reps = groupBy(list, (x: any) => x.name);
-    const nameReps = reps.map(([name, obj]) => ({
-      name,
-      reps: obj.map((nr: any) => nr.reps),
-    }));
+    const nameReps = reps.map(([name, obj]) => {
+      const reps = obj.map((nr: any) => nr.reps);
+      const flatReps = [].concat(...reps); // no nested arrays
+      return {
+        name,
+        reps: flatReps,
+      };
+    });
     return { period, nameReps };
   });
 }
@@ -93,11 +94,11 @@ export function groupWorkouts(data: Workout[], by: string): DateNameReps[] {
 function getPeriod(by: string) {
   switch (by) {
     case 'byDay':
-      return (x: Workout) => getDay(x.date)//.createdAt);
+      return (x: Workout) => getDay(x.date); //.createdAt);
     // case 'byWeek':
     //   return (x: unknown) => getWeek(x.createdAt);
     case 'byMonth':
-      return (x: Workout) => getMonth(x.date)//.createdAt);
+      return (x: Workout) => getMonth(x.date); //.createdAt);
     default:
       throw Error(`Invalid ${by} period`);
   }

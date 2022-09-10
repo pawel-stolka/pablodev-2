@@ -1,7 +1,22 @@
 <ng-template #noData>
-    <div>no data</div>
+  <div>no data</div>
 </ng-template>
 
 <ng-container *ngIf="workoutsGroups$ | async as workoutsGroups; else noData">
- {{ workoutsGroups | json }}
+  {{ workoutsGroups | json }}
+  <hr />
+  <ng-container *ngIf="workoutsGroups.length; else noData">
+    <section class="content">
+        <div *ngFor="let day of workoutsGroups; let i=index">
+            <div class="period">{{ day.period }}</div>
+            <div class="workout-list">
+
+                <div class="single-workout" 
+                        *ngFor="let workout of day.nameReps">
+                        {{ workout | json }}
+                        </div>
+            </div>
+            </div>
+    </section>
+  </ng-container>
 </ng-container>
