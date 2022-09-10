@@ -6,10 +6,12 @@ import { WorkoutService } from '../../services/workout.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   workouts$ = this.workoutService.workouts$;
 
   constructor(private workoutService: WorkoutService) {}
 
-  // ngOnInit(): void {}
+  ngOnInit(): void {
+    this.workoutService.fetchAll().subscribe();
+  }
 }

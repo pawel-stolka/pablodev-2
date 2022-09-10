@@ -1,1 +1,7 @@
-<p>workout-groups works!</p>
+<ng-template #noData>
+    <div>wait a moment...</div>
+</ng-template>
+
+<ng-container *ngIf="workouts$ | async as daySets; else noData">
+ {{ daySets | json }}
+</ng-container>
