@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DateNameReps } from '@pablodev2/data-models';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -7,8 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./workout-groups.component.scss'],
 })
 export class WorkoutGroupsComponent {
-  // @Input() workouts$!: Observable<DateNameReps[]>;
-  @Input() workouts$!: Observable<unknown[]>;
+  @Input() workoutsGroups$!: Observable<DateNameReps[]>;
 
   // constructor() {}
 

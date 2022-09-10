@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { WorkoutService } from '../../services/workout.service';
+import { DateNameReps, Workout } from '@pablodev2/data-models';
+import { map, Observable } from 'rxjs';
+import { compareBy, groupWorkouts, WorkoutService } from '../../services/workout.service';
+
+const DESCENDING = false;
 
 @Component({
   selector: 'pablodev2-home',
@@ -7,11 +11,18 @@ import { WorkoutService } from '../../services/workout.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  workouts$ = this.workoutService.workouts$;
+  workoutsGroups$!: Observable<DateNameReps[]>;
+  private by = 'byMonth';
+  // private by = 'byDay';
 
   constructor(private workoutService: WorkoutService) {}
 
   ngOnInit(): void {
-    this.workoutService.fetchAll().subscribe();
+    const workouts$ = this.workoutService.fetchAll();
+
+    this.workoutsGroups$ = workouts$.pipe(
+      map((workouts: Workout[]) => workouts.sort(compareBy('date', DESCENDING))),
+      map((workouts: Workout[]) => groupWorkouts(workouts, this.by))
+    );
   }
 }

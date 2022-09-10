@@ -1,7 +1,7 @@
 <ng-template #noData>
-    <div>wait a moment...</div>
+    <div>no data</div>
 </ng-template>
 
-<ng-container *ngIf="workouts$ | async as daySets; else noData">
- {{ daySets | json }}
+<ng-container *ngIf="workoutsGroups$ | async as workoutsGroups; else noData">
+ {{ workoutsGroups | json }}
 </ng-container>
