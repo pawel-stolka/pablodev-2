@@ -3,8 +3,8 @@
 </ng-template>
 
 <ng-container *ngIf="workoutsGroups$ | async as workoutsGroups; else noData">
-  {{ workoutsGroups | json }}
-  <hr />
+  <!-- {{ workoutsGroups | json }}
+  <hr /> -->
   <ng-container *ngIf="workoutsGroups.length; else noData">
     <section class="content">
         <div *ngFor="let day of workoutsGroups; let i=index">

@@ -14,19 +14,21 @@ const by = 'byMonth';
 })
 export class WorkoutService {
   private API_URL = 'http://localhost:3003';
+  // private url = `${this.API_URL}/workouts`;
+  private url = `${this.API_URL}/workouts-mock`;
 
-  // isPending$: Observable<boolean>;
-  // contentList$: Observable<Workout[]>;
+  isPending$: Observable<boolean>;
   contentList$: Observable<Workout[]>;
   // workouts$: Observable<DateNameReps[]>;
   workouts$: Observable<Workout[]>;
   period$: Observable<string>;
 
-  // private _contentListSubj = new BehaviorSubject<Workout[]>([]);
+  private _isPendingSubj = new BehaviorSubject(false);
   private _contentListSubj = new BehaviorSubject<Workout[]>([]);
   private _periodSubj = new BehaviorSubject<string>(by);
 
   constructor(private _http: HttpClient) {
+    this.isPending$ = this._isPendingSubj.asObservable();
     this.contentList$ = this._contentListSubj.asObservable();
     this.period$ = this._periodSubj.asObservable();
     this.workouts$ = combineLatest([this.contentList$, this.period$]).pipe(
@@ -36,12 +38,9 @@ export class WorkoutService {
   }
 
   fetchAll() {
-    return this._http.get<Workout[]>(`${this.API_URL}/workouts`).pipe(
+    return this._http.get<Workout[]>(this.url).pipe(
       delay(TEMP_DELAY), // ----> bajer temp -----
-      tap((workouts: Workout[]) => console.log('fetchAll', workouts)),
-      // map((workouts: Workout[]) =>
-      //   workouts.sort(compareBy('date', DESCENDING))
-      // ),
+      // tap((workouts: Workout[]) => console.log('fetchAll', workouts)),
       // tap((workouts: Workout[]) => {
       //   this._contentListSubj.next(workouts);
       //   // this.notificationsService.notify({
@@ -51,7 +50,7 @@ export class WorkoutService {
       //   // })
       // }),
       finalize(() => {
-        // this._isPendingSubj.next(false);
+        this._isPendingSubj.next(false);
       }),
       catchError((err) => {
         console.log('fetching ERROR', err);
