@@ -8,7 +8,7 @@ export class ExerciseSumPipe implements PipeTransform {
   transform(value: any, ...args: unknown[]): unknown {
     // let _sum = value.reduce
     console.log('value', value.slice())
-    let suffix = '';
+    // let suffix = '';
     const sum = value.reduce((next: any, number: any) => {
       if(typeof(number) === 'string') {
         // const params = number.reduce((next: any, nr: { split: (arg0: string) => [any, any]; }) => {
