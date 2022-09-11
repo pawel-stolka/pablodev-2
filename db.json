@@ -122,5 +122,43 @@
       "reps": [10],
       "id": 13
     }
+  ],
+  "daily-learning": {},
+  "daily-learning-mock": [
+    {
+      "id": 1,
+      "category": "css",
+      "subcategory": "test",
+      "date":"2022-09-11T16:31:00.000Z",
+      "description": "test-1"
+    },
+    {
+      "id": 2,
+      "category": "angular",
+      "subcategory": "DI",
+      "date":"2022-09-12T18:00:00.000Z",
+      "description": "test-2"
+    },
+    {
+      "id": 3,
+      "category": "css",
+      "subcategory": "grid",
+      "date":"2022-09-11T16:31:00.000Z",
+      "description": "layout rozeznanie o co kaman"
+    },
+    {
+      "id": 4,
+      "category": "UI",
+      "subcategory": "figma",
+      "date":"2022-09-11T14:01:00.000Z",
+      "description": "stworzenie layoutu - 1. kroki w figmie"
+    },
+    {
+      "id": 5,
+      "category": "angular",
+      "subcategory": "test",
+      "date":"2022-09-11T15:31:00.000Z",
+      "description": "container & presentation components"
+    }
   ]
 }

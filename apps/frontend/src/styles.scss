@@ -2,6 +2,10 @@
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+body {
+  margin: 0;
+}
+
 :root {
     --blue: rgb(45, 130, 241);
     --blue-light: rgb(125, 176, 243);

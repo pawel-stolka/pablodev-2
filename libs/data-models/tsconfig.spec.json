@@ -5,6 +5,6 @@
     "module": "commonjs",
     "types": ["jest", "node"]
   },
-  "files": ["src/test-setup.ts", "./src/lib/DateNameReps.d.ts", "./src/lib/NameReps.d.ts"],
-  "include": ["jest.config.ts", "**/*.test.ts", "**/*.spec.ts", "**/*.d.ts"]
+  "files": ["src/test-setup.ts", "./src/lib/DateNameReps.d.ts", "./src/lib/NameReps.d.ts", "./src/lib/LearningItem.d.ts", "./src/lib/LearningDetail.d.ts", "./src/lib/LearningCategory.d.ts"],
+  "include": ["jest.config.ts", "**/*.test.ts", "**/*.spec.ts", "**/*.d.ts", "src/lib/LearningItem.ts"]
 }

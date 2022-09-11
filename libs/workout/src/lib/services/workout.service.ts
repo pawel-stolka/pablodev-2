@@ -28,6 +28,7 @@ export class WorkoutService {
   private _periodSubj = new BehaviorSubject<string>(by);
 
   constructor(private _http: HttpClient) {
+    // this.HTTP_DELAY = DELAY;
     this.isPending$ = this._isPendingSubj.asObservable();
     this.contentList$ = this._contentListSubj.asObservable();
     this.period$ = this._periodSubj.asObservable();

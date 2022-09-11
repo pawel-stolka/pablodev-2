@@ -1,4 +1,9 @@
 <div>
+  {{ groups$ | async }}
+  <hr>
+  {{ categories$ | async | json }}
+</div>
+<div>
   <pablodev2-category-selector></pablodev2-category-selector>
   <pablodev2-learning-list></pablodev2-learning-list>
 </div>

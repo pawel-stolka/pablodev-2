@@ -4,3 +4,4 @@ export interface Workout {
   date: string;
   reps: number[] | string[];
 }
+

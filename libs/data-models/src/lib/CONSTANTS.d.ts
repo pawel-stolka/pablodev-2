@@ -1,0 +1,1 @@
+export const HTTP_DELAY = '1000';
