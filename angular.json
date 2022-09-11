@@ -4,6 +4,7 @@
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
+    "daily-learning": "libs/daily-learning",
     "data-models": "libs/data-models",
     "frontend": "apps/frontend",
     "frontend-e2e": "apps/frontend-e2e",

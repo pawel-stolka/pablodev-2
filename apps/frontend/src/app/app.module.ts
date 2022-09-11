@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UiModule } from '@pablodev2/ui';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { navigationRoutes } from '@pablodev2/navigation';
+// import { navigationRoutes } from '@pablodev2/daily-learning';
 import { LayoutModule } from '@pablodev2/layout';
 
 @NgModule({
@@ -32,6 +32,13 @@ import { LayoutModule } from '@pablodev2/layout';
         loadChildren: () =>
           import('@pablodev2/workout').then(
             (mod) => mod.WorkoutModule // added
+          ),
+      },
+      {
+        path: 'daily-learning',
+        loadChildren: () =>
+          import('@pablodev2/daily-learning').then(
+            (mod) => mod.DailyLearningModule // added
           ),
       },
     ]),
