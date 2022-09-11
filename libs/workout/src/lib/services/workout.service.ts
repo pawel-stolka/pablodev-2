@@ -38,6 +38,7 @@ export class WorkoutService {
   }
 
   fetchAll() {
+    this._isPendingSubj.next(true);
     return this._http.get<Workout[]>(this.url).pipe(
       delay(TEMP_DELAY), // ----> bajer temp -----
       // tap((workouts: Workout[]) => console.log('fetchAll', workouts)),

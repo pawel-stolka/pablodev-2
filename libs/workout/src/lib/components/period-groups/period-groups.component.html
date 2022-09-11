@@ -1,0 +1,15 @@
+<!-- {{ periodGroups | json }} -->
+
+<div *ngFor="let item of periodGroups; let i = index">
+  <div class="period">{{ item.period }}</div>
+  <div class="workout-list">
+    <div class="single-workout" *ngFor="let workout of item.nameReps">
+      <!-- {{ workout | json }} -->
+      <div class="exercise">
+        <div>{{ workout.name }}</div>
+        <div>{{ workout.reps }}</div>
+        <div>sum: {{ workout.reps | exerciseSum }}</div>
+      </div>
+    </div>
+  </div>
+</div>

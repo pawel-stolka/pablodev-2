@@ -1,0 +1,21 @@
+// .period {
+//     // width: 150%;
+//     border: 2px solid var(--blue);
+//     border-radius: 5px;
+//     padding: 2px 5px;
+//     margin-top: 5px;
+//     background-color: var(--blue-lightest);
+// }
+
+.workout-list {
+    border: 1px solid var(--blue);
+}
+
+.exercise {
+    // border: 1px solid var(--blue);
+    display: flex;
+
+    div {
+        margin: 0 10px;
+    }
+}

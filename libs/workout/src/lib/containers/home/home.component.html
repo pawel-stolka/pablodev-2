@@ -31,9 +31,13 @@
 <hr>
 
 <section>
+    <ng-container *ngIf="isPending$ | async">
+        <div class="content-loader">
+          <mat-spinner [strokeWidth]="2"></mat-spinner>
+        </div>
+    </ng-container>
     <div class="content">
         <pablodev2-workout-groups [workoutsGroups$]="workoutsGroups$"></pablodev2-workout-groups>
-        <!-- <ps-workout-groups [workouts$]="workouts$"></ps-workout-groups> -->
     </div>
 </section>
 

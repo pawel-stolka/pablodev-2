@@ -11,6 +11,7 @@ const DESCENDING = false;
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  isPending$ = this.workoutService.isPending$;
   workoutsGroups$!: Observable<DateNameReps[]>;
   private by = 'byMonth';
   // private by = 'byDay';

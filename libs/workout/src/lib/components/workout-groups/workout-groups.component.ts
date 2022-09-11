@@ -9,8 +9,4 @@ import { Observable } from 'rxjs';
 })
 export class WorkoutGroupsComponent {
   @Input() workoutsGroups$!: Observable<DateNameReps[]>;
-
-  // constructor() {}
-
-  // ngOnInit(): void {}
 }
