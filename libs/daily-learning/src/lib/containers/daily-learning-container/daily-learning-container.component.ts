@@ -41,7 +41,7 @@ export class DailyLearningContainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.serious6();
+    this.serious7();
     // this.rangle()
   }
 
@@ -67,6 +67,26 @@ export class DailyLearningContainerComponent implements OnInit {
     threeStreamsOfThings$.pipe(tap((x) => console.log('res', x))).subscribe();
   }
 
+  serious7() {
+    this.learnings$ = this.learningService
+      .fetchAll()
+      .pipe(tap((data) => console.log('init data', data)));
+
+    this.start$ = this.learnings$.pipe(
+      tap((x) => console.log('start', x)),
+      mergeMap((res) => res),
+      groupBy((item) => item.category),
+      mergeMap((obs) =>
+        obs.pipe(
+          toArray(),
+          map(items => ({ [obs.key]: items }))
+        )
+      ),
+      toArray(),
+      tap((wynik) => console.log('wynik', wynik))
+    );
+  }
+
   serious6() {
     const data = [
       { groupId: 'foo', value: 1 },
@@ -75,11 +95,13 @@ export class DailyLearningContainerComponent implements OnInit {
       { groupId: 'foo', value: 5 },
       { groupId: 'bar', value: 1337 },
     ];
-    
-    this.start$ = of(data).pipe(
+
+    const obsArr$ = of(data);
+    this.start$ = obsArr$.pipe(
       mergeMap((res) => res),
       groupBy((item) => item.groupId),
-      mergeMap((obs) => obs.pipe(
+      mergeMap((obs) =>
+        obs.pipe(
           toArray(),
           map((items) => {
             return { [obs.key]: items };
@@ -87,8 +109,8 @@ export class DailyLearningContainerComponent implements OnInit {
         )
       ),
       toArray(),
-      tap(wynik => console.log('wynik', wynik))
-    )
+      tap((wynik) => console.log('wynik', wynik))
+    );
     // fin$.subscribe();
     // .subscribe(map((groupResponse) => {
     //     let groups = {};
