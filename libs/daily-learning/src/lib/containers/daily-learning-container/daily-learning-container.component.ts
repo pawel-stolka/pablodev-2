@@ -41,32 +41,84 @@ export class DailyLearningContainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.serious4()
+    this.serious6();
     // this.rangle()
   }
 
   rangle() {
     const setsOfValues = [
-      ["a", "b", "c", "d", "e", "f"],
+      ['a', 'b', 'c', 'd', 'e', 'f'],
       [1, 2, 3, 4, 5, 6],
-      ["😀", "🐶", "🍏", "⚽️", "🚗", "⌚️"]
+      ['😀', '🐶', '🍏', '⚽️', '🚗', '⌚️'],
     ];
 
     const threeStreamsOfThings$ = timer(0, 1800).pipe(
       take(3),
-      map(outerNumber =>
+      map((outerNumber) =>
         timer(0, 250).pipe(
           take(6),
-          map(innerNumber => setsOfValues[outerNumber][innerNumber])
+          map((innerNumber) => setsOfValues[outerNumber][innerNumber])
         )
       ),
       // flatMap(value => value)
-      switchMap(value => value)
+      switchMap((value) => value)
     );
 
-    threeStreamsOfThings$.pipe(
-      tap(x => console.log('res', x))
-    ).subscribe()
+    threeStreamsOfThings$.pipe(tap((x) => console.log('res', x))).subscribe();
+  }
+
+  serious6() {
+    const data = [
+      { groupId: 'foo', value: 1 },
+      { groupId: 'foo', value: 3 },
+      { groupId: 'bar', value: 42 },
+      { groupId: 'foo', value: 5 },
+      { groupId: 'bar', value: 1337 },
+    ];
+    
+    this.start$ = of(data).pipe(
+      mergeMap((res) => res),
+      groupBy((item) => item.groupId),
+      mergeMap((obs) => obs.pipe(
+          toArray(),
+          map((items) => {
+            return { [obs.key]: items };
+          })
+        )
+      ),
+      toArray(),
+      tap(wynik => console.log('wynik', wynik))
+    )
+    // fin$.subscribe();
+    // .subscribe(map((groupResponse) => {
+    //     let groups = {};
+    //     groupResponse.forEach((item) => { groups = { ...groups, ...item }; });
+    //     console.log(groups);
+    // });
+  }
+
+  serious5() {
+    // this.learnings$ = this.learningService.fetchAll().pipe(
+    //   tap(data => console.log('init data', data)),
+    // )
+
+    const people = [
+      { name: 'Sue', age: 25 },
+      { name: 'Joe', age: 30 },
+      { name: 'Frank', age: 25 },
+      { name: 'Sarah', age: 35 },
+    ];
+
+    const ooo = of(people) // <- this gets Observable<Object[]>
+      .pipe(
+        mergeMap((res) => res), // <- use concatMap() if you care about the order
+        groupBy(
+          (person) => person.age,
+          (p) => p.name
+        ),
+        mergeMap((group) => zip(of(group.key), group.pipe(toArray())))
+      );
+    // .subscribe(console.log);
   }
 
   serious4() {
@@ -74,52 +126,54 @@ export class DailyLearningContainerComponent implements OnInit {
       { name: 'Sue', age: 25 },
       { name: 'Joe', age: 30 },
       { name: 'Frank', age: 25 },
-      { name: 'Sarah', age: 35 }
+      { name: 'Sarah', age: 35 },
     ];
-    
-    this.start$ = from(people).pipe(
-      groupBy(person => person.age, p => p.name),
-      mergeMap(group => zip(of(group.key), group.pipe(toArray()))),
+    const obsArr$ = from(people);
+    this.start$ = obsArr$.pipe(
+      groupBy(
+        (person) => person.age,
+        (p) => p.name
+      ),
+      mergeMap((group) => zip(of(group.key), group.pipe(toArray()))),
       tap(([age, names]) => console.log('what', age, names)),
       // map((res) => [{age: res[0], names: res[1]}]),
       toArray(),
       // map((res) => [{
       //   a: res[0]
       // }]),
-      tap(fin => console.log('fin', fin)),
-    )
+      tap((fin) => console.log('fin', fin))
+    );
     // .subscribe(console.log);
-    
   }
 
   serious3() {
-    this.learnings$ = this.learningService.fetchAll().pipe(
-      tap(data => console.log('init data', data)),
-    )
+    this.learnings$ = this.learningService
+      .fetchAll()
+      .pipe(tap((data) => console.log('init data', data)));
 
-    const people = [  
-      { name: 'Alex', age: 31 },  
-      { name: 'Adam', age: 28 },  
-      { name: 'Alia', age: 21 },  
-      { name: 'David', age: 35 },  
-      { name: 'Rhea', age: 28 },  
-      { name: 'Samson', age: 31 },  
-      { name: 'Dhoni', age: 35 }  
-    ];  
-    let thisstart$ = from(people)  
-      .pipe(  
-        groupBy(  
-          person => person.age,  
-          p => p.name  
-        ),  
-        mergeMap(group => zip(of(group.key), group.pipe(toArray()))),
+    const people = [
+      { name: 'Alex', age: 31 },
+      { name: 'Adam', age: 28 },
+      { name: 'Alia', age: 21 },
+      { name: 'David', age: 35 },
+      { name: 'Rhea', age: 28 },
+      { name: 'Samson', age: 31 },
+      { name: 'Dhoni', age: 35 },
+    ];
+    const thisstart$ = from(people)
+      .pipe(
+        groupBy(
+          (person) => person.age,
+          (p) => p.name
+        ),
+        mergeMap((group) => zip(of(group.key), group.pipe(toArray()))),
         // map((a) => ({ a: a, b: a})),
-        flatMap(x => x),
+        flatMap((x) => x)
         // mergeAll(),
         // tap(x => console.log(x))
-      )  
-      .subscribe(r => console.log('r', r));  
-    
+      )
+      .subscribe((r) => console.log('r', r));
+
     // this.start$ = this.learnings$.pipe(
     //   mergeMap(x => x),
     //   groupBy(l => l.category),
@@ -129,40 +183,39 @@ export class DailyLearningContainerComponent implements OnInit {
     //   tap(data => console.log('fin', data)),
     // )
     // .subscribe()
-
-    
   }
 
   serious2() {
-    this.learnings$ = this.learningService.fetchAll().pipe(
-      tap(data => console.log('init data', data)),
-    )
+    this.learnings$ = this.learningService
+      .fetchAll()
+      .pipe(tap((data) => console.log('init data', data)));
 
     // this.categories$
-    let thisstart$ = this.learnings$.pipe(
-      tap(data => console.log('first', data)),
-      mergeAll(),
-      groupBy(x => x.category),
-      // groupBy((x) => x.map(i => i.category)),
-      // flatMap(value => value),
-      switchMap(value => value.pipe(tap(x => console.log('?', x)))),//, x => x.pipe(toArray())),
-      toArray(),
-      tap(data => console.log('fin', data)),
-    ).subscribe()
+    const thisstart$ = this.learnings$
+      .pipe(
+        tap((data) => console.log('first', data)),
+        mergeAll(),
+        groupBy((x) => x.category),
+        // groupBy((x) => x.map(i => i.category)),
+        // flatMap(value => value),
+        switchMap((value) => value.pipe(tap((x) => console.log('?', x)))), //, x => x.pipe(toArray())),
+        toArray(),
+        tap((data) => console.log('fin', data))
+      )
+      .subscribe();
   }
 
   serious() {
-    this.learnings$ = this.learningService.fetchAll().pipe(
-      tap(data => console.log('init data', data)),
-      
-    )
+    this.learnings$ = this.learningService
+      .fetchAll()
+      .pipe(tap((data) => console.log('init data', data)));
     // this.categories$
     this.start$ = this.learnings$.pipe(
-      map(items => items.map(item => ({ category: item.category}))),//, description: item.description  }))),
-      tap(res => console.log('res', res)),
+      map((items) => items.map((item) => ({ category: item.category }))), //, description: item.description  }))),
+      tap((res) => console.log('res', res)),
       groupBy((x) => x),
-      mergeMap(group => group),
-      tap(res => console.log('fin', res)),
+      mergeMap((group) => group),
+      tap((res) => console.log('fin', res))
       // map(data => from(data)),
       // mergeAll(),
       // groupBy(item => item.category),
@@ -173,16 +226,15 @@ export class DailyLearningContainerComponent implements OnInit {
       // toArray(),
       // toArray(),
       // tap(ex => console.log('examples grouped', ex))
-    )
+    );
     // .subscribe(res => console.log('res grouped', res))
   }
 
   fromFetch(url: string): Observable<any> {
     // : Observable<{userId: string, id: string, title: string, completed: boolean}[]> {
-    return this.http.get(url)//.pipe(map((res: any) => res.json()))
-    .pipe(
-      tap(raw => console.log('raw', raw))
-    )
+    return this.http
+      .get(url) //.pipe(map((res: any) => res.json()))
+      .pipe(tap((raw) => console.log('raw', raw)));
   }
 
   demo() {
@@ -195,17 +247,17 @@ export class DailyLearningContainerComponent implements OnInit {
     // source$.subscribe((x) => console.log('source$', x));
 
     // #2 real
-    
+
     const fetchUrl = 'https://jsonplaceholder.typicode.com/todos';
-    const todosFetch$ = this.fromFetch(fetchUrl)//.pipe(switchMap((res) => res.json()))
+    const todosFetch$ = this.fromFetch(fetchUrl); //.pipe(switchMap((res) => res.json()))
 
     this.example$ = todosFetch$.pipe(
-      map(data => from(data)),
+      map((data) => from(data)),
       mergeAll(),
       groupBy((item: any) => item.userId),
       mergeMap((group) => group.pipe(toArray())),
       toArray(),
-      tap(ex => console.log('examples grouped', ex))
+      tap((ex) => console.log('examples grouped', ex))
     );
 
     const learnings$ = this.learningService.fetchAll();
