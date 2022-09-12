@@ -7,6 +7,8 @@ import {
   mergeMap,
   toArray,
   tap,
+  combineLatest,
+  of,
 } from 'rxjs';
 import { DailyLearningService } from '../../services/daily-learning.service';
 
@@ -17,6 +19,9 @@ import { DailyLearningService } from '../../services/daily-learning.service';
 })
 export class DailyLearningContainerComponent implements OnInit {
   categories$!: Observable<LearningCategory[]>;
+  details$!: Observable<LearningItem[]>;
+  // details$!: Observable<any[]>;
+  selection$!: Observable<string>;
 
   constructor(private learningService: DailyLearningService) {}
 
@@ -39,5 +44,24 @@ export class DailyLearningContainerComponent implements OnInit {
       toArray(),
       tap((cats: LearningCategory[]) => console.log('cats', cats))
     );
+
+    this.details$ = combineLatest([
+      this.categories$,
+      this.selection$
+    ]).pipe(
+      // map(([categories, selection]) => ([])),
+      tap(x => console.log('--x', x)),
+      map(([categories, selection]) => {
+        console.log('categories, selection', categories, selection)
+        const res: LearningItem[] = [{
+          id: 0,
+          category: '',
+          date: '',
+          description: 'sfdsf'
+        }]
+
+        return res
+      })
+    )
   }
 }

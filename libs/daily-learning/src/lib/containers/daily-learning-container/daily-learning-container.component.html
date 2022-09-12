@@ -1,5 +1,10 @@
+<ng-container *ngIf="(details$ | async) as details">
+  {{ details }}
+</ng-container>
 
 <div>
-  <pablodev2-category-selector [categories$]="categories$"></pablodev2-category-selector>
+  <pablodev2-category-selector
+    [categories$]="categories$"
+  ></pablodev2-category-selector>
   <pablodev2-learning-list></pablodev2-learning-list>
 </div>
