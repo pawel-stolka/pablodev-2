@@ -1,23 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LearningCategory, LearningItem } from '@pablodev2/data-models';
 import {
   map,
-  tap,
-  count,
   Observable,
   groupBy,
   mergeMap,
   toArray,
-  from,
-  zip,
-  of,
-  mergeAll,
-  switchMap,
-  take,
-  timer,
-  flatMap,
-  reduce,
+  tap,
 } from 'rxjs';
 import { DailyLearningService } from '../../services/daily-learning.service';
 
@@ -29,9 +18,7 @@ import { DailyLearningService } from '../../services/daily-learning.service';
 export class DailyLearningContainerComponent implements OnInit {
   categories$!: Observable<LearningCategory[]>;
 
-  constructor(
-    private learningService: DailyLearningService,
-  ) {}
+  constructor(private learningService: DailyLearningService) {}
 
   ngOnInit(): void {
     this.categorize();
@@ -46,10 +33,11 @@ export class DailyLearningContainerComponent implements OnInit {
       mergeMap((obs) =>
         obs.pipe(
           toArray(),
-          map((items: any) => ({ title: obs.key, items }))
+          map((items: LearningItem[]) => ({ title: obs.key, items }))
         )
       ),
-      toArray()
+      toArray(),
+      tap((cats: LearningCategory[]) => console.log('cats', cats))
     );
   }
 }

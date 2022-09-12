@@ -2,7 +2,7 @@
 export interface LearningCategory {
     title: string;
     subtitle?: string;
-    items: [],
+    items: Array,
     amount?: number;
 }
 
