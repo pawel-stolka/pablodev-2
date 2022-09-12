@@ -1,4 +1,4 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 export { Workout } from "./Workout";
 export { DateNameReps } from './DateNameReps'

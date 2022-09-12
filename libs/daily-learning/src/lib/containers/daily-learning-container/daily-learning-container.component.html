@@ -1,7 +1,18 @@
 <div>
-  {{ groups$ | async }}
-  <hr>
-  {{ categories$ | async | json }}
+  <!-- {{ groups$ | async }}
+  <hr> -->
+  <ng-container *ngIf="example$ | async as groups">
+    <div *ngFor="let g of groups">
+        <p>userId: {{ g[0].userId }}</p>
+        <p>title: {{ g[0].title }}</p>
+        <p>{{ g.length }}</p>
+        <!-- <div *ngFor="let sub of g">
+            <p>{{ sub.userId }}</p>
+            <p>{{ sub.completed }}</p>
+        </div> -->
+    </div>
+  </ng-container>
+  <!-- {{ categories$ | async | json }} -->
 </div>
 <div>
   <pablodev2-category-selector></pablodev2-category-selector>
