@@ -159,6 +159,13 @@
       "subcategory": "test",
       "date":"2022-09-11T15:31:00.000Z",
       "description": "container & presentation components"
+    },
+    {
+      "id": 6,
+      "category": "angular",
+      "subcategory": "rxjs",
+      "date":"2022-09-12T23:40:00.000Z",
+      "description": "Higher Order Observables"
     }
   ]
 }

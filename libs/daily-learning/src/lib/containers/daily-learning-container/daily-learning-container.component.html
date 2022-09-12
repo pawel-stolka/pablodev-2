@@ -10,18 +10,19 @@
     </div>
   </ng-container>
   <hr> -->
+  categories$
   <ng-container *ngIf="categories$ | async as categories">
     <div *ngFor="let cat of categories">
-        {{ cat | json }}
+        {{ cat.title }}: {{ cat.items.length}}
     </div>
   </ng-container>
   
-  start$
+  <!-- start$
   <ng-container *ngIf="start$ | async as start">
     <div *ngFor="let cat of start">
         {{ cat | json }}
     </div>
-  </ng-container>
+  </ng-container> -->
 
 
   <!-- {{ groups$ | async }}
@@ -40,6 +41,6 @@
   <!-- {{ categories$ | async | json }} -->
 </div>
 <div>
-  <pablodev2-category-selector></pablodev2-category-selector>
+  <pablodev2-category-selector [categories$]="categories$"></pablodev2-category-selector>
   <pablodev2-learning-list></pablodev2-learning-list>
 </div>

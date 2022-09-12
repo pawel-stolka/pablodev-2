@@ -2,7 +2,12 @@
     <mat-card-title>categories</mat-card-title>
     <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
     <mat-card-content>
-      <p>This card indeterminates progress bar.</p>
+        <ng-container *ngIf="categories$ | async as categories">
+            <div *ngFor="let cat of categories">
+                {{ cat.title }}: {{ cat.items.length}}
+            </div>
+          </ng-container>
+      <!-- <p>This card indeterminates progress bar.</p> -->
     </mat-card-content>
     <!-- <mat-card-actions>
       <button mat-button>LIKE</button>

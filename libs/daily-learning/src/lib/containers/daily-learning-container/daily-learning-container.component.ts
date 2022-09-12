@@ -79,12 +79,26 @@ export class DailyLearningContainerComponent implements OnInit {
       mergeMap((obs) =>
         obs.pipe(
           toArray(),
-          map(items => ({ [obs.key]: items }))
+          // tap(x => console.log('mid', x)),
+          map(items => ({ title: obs.key, items }))
         )
       ),
       toArray(),
       tap((wynik) => console.log('wynik', wynik))
     );
+
+    this.categories$ = this.start$.pipe(
+      // map(x => Array.from(x)),
+      tap((wynik) => console.log('cats', wynik)),
+    )
+    // .pipe(
+    //   tap((wynik) => console.log('cats', wynik)),
+    //   map(x => x.map(i => ({
+
+    //     title: i.category
+    //   }))),
+    //   tap((wynik) => console.log('fin', wynik)),
+    // )
   }
 
   serious6() {
