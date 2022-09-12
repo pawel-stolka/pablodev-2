@@ -1,17 +1,42 @@
 <div>
+  <!-- <ng-container *ngIf="learnings$ | async as learnings">
+    <div *ngFor="let item of learnings">
+      <p>
+        [{{ item.category }}]
+      </p>
+      <p>
+        {{ item.description }}
+      </p>
+    </div>
+  </ng-container>
+  <hr> -->
+  <ng-container *ngIf="categories$ | async as categories">
+    <div *ngFor="let cat of categories">
+        {{ cat | json }}
+    </div>
+  </ng-container>
+  
+  start$
+  <ng-container *ngIf="start$ | async as start">
+    <div *ngFor="let cat of start">
+        {{ cat | json }}
+    </div>
+  </ng-container>
+
+
   <!-- {{ groups$ | async }}
   <hr> -->
-  <ng-container *ngIf="example$ | async as groups">
+  <!-- <ng-container *ngIf="example$ | async as groups">
     <div *ngFor="let g of groups">
         <p>userId: {{ g[0].userId }}</p>
         <p>title: {{ g[0].title }}</p>
         <p>{{ g.length }}</p>
-        <!-- <div *ngFor="let sub of g">
+        <div *ngFor="let sub of g">
             <p>{{ sub.userId }}</p>
             <p>{{ sub.completed }}</p>
-        </div> -->
+        </div>
     </div>
-  </ng-container>
+  </ng-container> -->
   <!-- {{ categories$ | async | json }} -->
 </div>
 <div>
